@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+  
 # standard libary
 import json
 
@@ -10,13 +10,10 @@ import requests
 def dndracecalculator(height):
     # API List
     api0 = "https://www.dnd5eapi.co/api/races"
-
     # Create response object with GET
     resp0 = requests.get(api0)
-
     # convert response into dictionary
     respdata0 = resp0.json()
-
     return racecalc
 
 
@@ -24,72 +21,59 @@ def astroclass(sign):
     # Reference Variables
     with open("classes.json", "r") as dndj:
         dndclasses = json.load(dndj)
+    while True:
+        if sign.lower() == "aquarius":
+            return ("You got Cleric!", dndclasses.get("Cleric"))
+        elif sign.lower() == "picses":
+            return ("You got Bard!", dndclasses.get("Bard"))
+        elif sign.lower() == "aries":
+            return ("You got Ranger!", dndclasses.get("Ranger"))
+        elif sign.lower() == "taurus":
+            return ("You got Monk!", dndclasses.get("Monk"))
+        elif sign.lower() == "gemini":
+            return ("You got Druid!", dndclasses.get("Druid"))
+        elif sign.lower() == "cancer":
+            return ("You got Paladin", dndclasses.get("Paladin"))
+        elif sign.lower() == "leo":
+            return ("You got Sorcerer!", dndclasses.get("Sorcerer"))
+        elif sign.lower() == "virgo":
+            return ("You got Wizard!", dndclasses.get("Wizard"))
+        elif sign.lower() == "libra":
+            return ("You got Rogue!", dndclasses.get("Rogue"))
+        elif sign.lower() == "scorpio":
+            return ("You got Fighter!", dndclasses.get("Fighter"))
+        elif sign.lower() == "sagittarius":
+            return ("You got Barbarian!", dndclasses.get("Barbarian"))
+        elif sign.lower() == "capricorn":
+            return ("You got Warlock!", dndclasses.get("Warlock"))
+        else:
+            print("I\'m sorry, you either misspelled your astrology or you don't believe in one.\n"+"We recommend you finding out what your western astrology sign is so you can get full benefit.")
+            break
 
-    if sign == "aquarius":
-        return ("cleric", dndclasses.get("Cleric"))
-    elif sign == "picses":
-        return ("bard", dndclasses.get("Bard"))
-    elif sign == "aries":
-        return ("ranger", dndclasses.get("Ranger"))
-    elif sign.lower() == "taurus":
-        print(monk0)
-    elif sign.lower() == "gemini":
-        print(druid0)
-    elif sign.lower() == "cancer":
-        print(paladin0)
-    elif sign.lower() == "leo":
-        print(sorcerer0)
-    elif sign.lower() == "virgo":
-        print(wizard0)
-    elif sign.lower() == "libra":
-        print(rogue0)
-    elif sign.lower() == "scorpio":
-        print(fighter0)
-    elif sign.lower() == "sagittarius":
-        print(barbarian0)
-    elif sign.lower() == "capricorn":
-        print(warlock0)
-    else:
-        return "I'm sorry, you either misspelled your astrology or you don't believe in one."
-
-
-
-# dndfile = open('Classes.txt', 'r')
-# bard0 = (dndfile.read()+(print('Bard')))
-# barbarian0 = (dndfile.read()+(print('Barbarian')))
-# cleric0 = (dndfile.read()+(print('Cleric')))
-# druid0 = (dndfile.read()+(print('Druid')))
-# fighter0 = (dndfile.read()+(print('Fighter')))
-# monk0 = (dndfile.read()+(print('Monk')))
-# paladin0 = (dndfile.read()+(print('Paladin')))
-# ranger0 = (dndfile.read()+(print('Ranger')))
-# rogue0 = (dndfile.read()+(print('Rogue')))
-# sorcerer0 = (dndfile.read()+(print('Sorcerer')))
-# warlock0 = (dndfile.read()+(print('Warlock')))
-# wizard0 = (dndfile.read()+(print('Wizard')))
-
-# Runtime
 
 def role():
-    """Gather information to help fill out code later"""
     name = input('What is your name?\n')
-    
+    print("We will be using this to save your information for later. Thank you.")
+    signs = ["capricorn","sagittarius","scorpio","libra","virgo","leo","cancer","gemini","taurus","aries","pisces","aquarius"]
     sign = input('What is your western astrology sign?\n')
     # dndclass will be the chosen class
     dndclass = astroclass(sign.lower())
-    print(dndclass)
-    print(dndclass[0])
-    print(dndclass[1])
+    # print(dndclass)
+    if sign.lower() not in signs:
+        return
+    else:
+        print(dndclass[0])
+        print(dndclass[1])
+        
+    
 
 
     height = input('How tall are you in inches? Rounded up to the nearest inch\n')
     return dndclass
 
-
-
 def main():
     """run time applicaiton"""
-    print("Welcome to the Dungeons and Dragons gaming application")
+    print("Welcome to the Dungeons and Dragons gaming application. Here we will determine your ")
     role()
 
 
