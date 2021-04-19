@@ -14,36 +14,52 @@ def dndracecalculator(height):
     resp0 = requests.get(api0)
     # convert response into dictionary
     respdata0 = resp0.json()
-    # height will be chosen race
+    with open("races.json", "r") as dndjs:
+        dndraces = json.load(dndjs)
+    # function to determine DND race off of height
     if height >= 74:
-        return respdata0.get("dragonborn")
+        return "You are a Dragonborn!", respdata0.get("results")[0]["name"], dndraces.get("dragonborn")
     elif height == 72 or 73:
-        return respdata0.get("half-orc")
+        return "You are a Half-Orc!", respdata0.get("results")[5]["name"], dndraces.get("half-orc")
     elif height == 70 or 71:
-        return respdata0.get("human")
+        return "You are a Human! How Ironic?", respdata0.get("results")[7]["name"], dndraces.get("human")
     elif height == 68 or 69:
-        return respdata0.get("tiefling")
+        return "You are a Tiefling!", respdata0.get("results")[8]["name"], dndraces.get("tiefling")
     elif height == 66 or 67:
-        return respdata0.get("half-elf")
+        return "You are a Half-Elf!", respdata0.get("results")[4]["name"], dndraces.get("half-elf")
     elif height == 64 or 65:
-        return respdata0.get("elf")
+        return "You are an Elf!", respdata0.get("results")[2]["name"], dndraces.get("elf")
     elif height == 62 or 63:
-        return respdata0.get("dwarf")
+        return "You are a Dwarf!", respdata0.get("results")[1]["name"], dndraces.get("dwarf")
     elif height == 60 or 61:
-        return respdata0.get("gnome")
+        return "You are a Gnome!", respdata0.get("results")[3]["name"], dndraces.get("gnome")
     elif height <= 59:
-        return respdata0.get("halfling")
+        return "You are a Halfling!", respdata0.get("results")[6]["name"], dndraces.get("halfling")
     else:
         return
+
+
+def racecomp():
+    # Query Height
+    height = int(input('How tall are you in inches? Remember, 5ft is equal to 60in\n'))
+    # Now to print racial features with results
+    dndrace = dndracecalculator(height)
+    heights = list(range(1,100))
+    if height not in heights:
+        return
+    else:
+        print(dndrace[0])
+        print(dndrace[2])
 
 
 def astroclass(sign):
     # Reference Variables
     with open("classes.json", "r") as dndj:
         dndclasses = json.load(dndj)
+    while True:
         if sign.lower() == "aquarius":
             return "You got Cleric!", dndclasses.get("Cleric")
-        elif sign.lower == "pisces":
+        elif sign.lower() == "pisces":
             return "You got Bard!", dndclasses.get("Bard")
         elif sign.lower() == "aries":
             return "You got Ranger!", dndclasses.get("Ranger")
@@ -67,35 +83,35 @@ def astroclass(sign):
             return "You got Warlock!", dndclasses.get("Warlock")
         else:
             print(
-                "I\'m sorry, you either misspelled your astrology or you don\'t believe in one.\n"
+                "I\'m sorry, you either misspelled your astrology or you don't believe in one.\n" +
                 "We recommend you finding out what your western astrology sign is so you can get full benefit.")
+            break
 
 
 def role():
-    """Gather information to help fill out code later"""
     name = input('What is your name?\n')
     print("We will be using this to save your information for later. Thank you.")
-    sign = input('What is your western astrology sign?\n')
     signs = ["capricorn", "sagittarius", "scorpio", "libra", "virgo", "leo", "cancer", "gemini", "taurus", "aries",
              "pisces", "aquarius"]
+    sign = input('What is your western astrology sign?\n')
     # dndclass will be the chosen class
     dndclass = astroclass(sign.lower())
     # print(dndclass)
-    if sign.lower() != signs:
+    if sign.lower() not in signs:
         return
     else:
         print(dndclass[0])
         print(dndclass[1])
-
-
-height = input('How tall are you in inches? Rounded up to the nearest inch\n')
+        return dndclass
 
 
 def main():
     """run time application"""
-    print("Welcome to the Dungeons and Dragons application. We want to help you decide your first DND Character")
+    print("Welcome to the Dungeons and Dragons gaming application. Here we will determine your ")
     role()
-
+    racecomp()
+    
 
 if __name__ == "__main__":
     main()
+
