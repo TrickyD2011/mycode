@@ -41,15 +41,25 @@ def dndracecalculator(height):
 
 def racecomp():
     # Query Height
-    height = int(input('How tall are you in inches? Remember, 5ft is equal to 60in\n'))
-    # Now to print racial features with results
+    def truth():
+        # Loop until integer is given
+        while True:
+            try:
+                x = int(input('How tall are you in inches? Remember, 5ft is equal to 60in\n'))
+                if x >= 0:
+                    print("Thank you")
+                elif x > 100:
+                    print("You aren\'t fooling anyone")
+                else:
+                    break
+            except ValueError:
+                print("I need your height to be written in numbers only. Please try again")
+                continue
+            return x
+    height = truth()
     dndrace = dndracecalculator(height)
-    heights = list(range(1,100))
-    if height not in heights:
-        return
-    else:
-        print(dndrace[0])
-        print(dndrace[2])
+    print(dndrace[0])
+    print(dndrace[2])
 
 
 def astroclass(sign):
