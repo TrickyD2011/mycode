@@ -2,7 +2,7 @@
 
 # standard library
 import json
-
+import os
 # Import List
 import requests
 
@@ -58,8 +58,10 @@ def racecomp():
             return x
     height = truth()
     dndrace = dndracecalculator(height)
+    print("Fact checking with online resources: ", dndrace[1])
     print(dndrace[0])
     print(dndrace[2])
+    return dndrace
 
 
 def astroclass(sign):
@@ -99,8 +101,6 @@ def astroclass(sign):
 
 
 def role():
-    name = input('What is your name?\n')
-    print("We will be using this to save your information for later. Thank you.")
     signs = ["capricorn", "sagittarius", "scorpio", "libra", "virgo", "leo", "cancer", "gemini", "taurus", "aries",
              "pisces", "aquarius"]
     sign = input('What is your western astrology sign?\n')
@@ -115,12 +115,32 @@ def role():
         return dndclass
 
 
+#def saving(names, dndclass, dndrace):
+#    look = "/home/student/mycode/mainworkline/{}.txt".format(names)
+#    if os.path.exists(look):
+#        print("You already have a file.")
+#        r = open("{}.txt".format(names), "r")
+#        print(r.read())
+#        r.close()
+#    else:
+#        f = open("{}.txt".format(names), "w")
+#        f.write(dndclass + "\n")
+#        f.write(dndrace + "\n")
+#        f.close()
+
+def names():
+    names = input('First, what is your name? \n')
+    print("We will save your character as a text named after you")
+    print(names)
+    return names
+
 def main():
     """run time application"""
-    print("Welcome to the Dungeons and Dragons gaming application. Here we will determine your ")
+    print("Welcome to the Dungeons and Dragons gaming. Here we will determine your first Character ")
+    names()
     role()
     racecomp()
-    
+#    saving(names, dndclass, dndrace)
 
 if __name__ == "__main__":
     main()
